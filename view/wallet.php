@@ -5,12 +5,12 @@ if (!empty($error))
     echo "<p style='font-weight: bold; color: red;'>" . $error['message']; "</p>";
 }
 ?>
-<p><?php echo $lang['WALLET_HELLO']; ?>, <strong><?php echo $user_session; ?></strong>!  <?php if ($admin) {?><strong><font color="red">[Admin]</font><?php }?></strong></p>
-<p><?php echo $lang['WALLET_BALANCE']; ?> <strong id="balance"><?php echo satoshitize($balance); ?></strong> <?=$short?></p>
+<!--<p><?php echo $lang['WALLET_HELLO']; ?>, <strong><?php echo $user_session; ?></strong>!  <?php if ($admin) {?><strong><font color="red">[Admin]</font><?php }?></strong></p>-->
+<!--<p><?php echo $lang['WALLET_BALANCE']; ?> <strong id="balance"><?php echo satoshitize($balance); ?></strong> <?=$short?></p>-->
 
 <form action="index.php" method="POST">
 
-br />
+<br>
 <?php
 if ($admin)
 {
@@ -90,6 +90,8 @@ if ($admin)
 </thead>
 <tbody>
 <?php
+if(!empty($addressList))
+{
 foreach ($addressList as $address)
 {
 echo "<tr><td>".$address."</t>";?>
@@ -97,7 +99,7 @@ echo "<tr><td>".$address."</t>";?>
   <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<?php echo $address?>" alt="QR Code" style="width:42px;height:42px;border:0;"></td><tr>
 <?php
 }
-?>
+}?>
 </tbody>
 </table>
 <p><?php echo $lang['WALLET_LAST10']; ?></p>
@@ -115,6 +117,8 @@ echo "<tr><td>".$address."</t>";?>
 </thead>
 <tbody>
    <?php
+   if(!empty($transactionList))
+   {
    $bold_txxs = "";
    foreach($transactionList as $transaction) {
       if($transaction['category']=="send") { $tx_type = '<b style="color: #FF0000;">Sent</b>'; } else { $tx_type = '<b style="color: #01DF01;">Received</b>'; }
@@ -127,6 +131,7 @@ echo "<tr><td>".$address."</t>";?>
                <td>'.$transaction['confirmations'].'</td>
                <td><a href="' . $blockchain_url,  $transaction['txid'] . '" target="_blank">Info</a></td>
             </tr>';
+   }
    }
    ?>
    </tbody>
