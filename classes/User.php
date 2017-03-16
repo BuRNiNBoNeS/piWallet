@@ -249,15 +249,32 @@ class User {
 		}
 	}
 
-      function disauth()
-              {
-     		 $id=$_SESSION['user_id'];
-    		  if (($id))
-     		 {
-			$msg = "Two Factor Auth has been disabled for your account and will no longer be required when you sign in.";
-			$this->mysqli->query("UPDATE users SET authused=0, secret='' WHERE id=" . $id); return "$msg";
-	         }
-              }
+   function disauth()
+		{
+			$id=$_SESSION['user_id'];
+			if (($id))
+			{
+				$msg = "Two Factor Auth has been disabled for your account and will no longer be required when you sign in.";
+				$this->mysqli->query("UPDATE users SET authused=0, secret='' WHERE id=" . $id); return "$msg";
+			}
+		}
+   
+   function userHas2fA()
+   {
+	   $id=$_SESSION['user_id'];
+			if (($id))
+			{
+				$twoFA = $this->mysqli->query("SELECT authused WHERE id=" . $id);
+				if($twoFA == 1) 
+				{
+					return true;
+				} 
+				else
+				{
+					return false;
+				}
+			}
+   }
 
    function adminDeleteAccount($id)
 

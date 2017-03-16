@@ -19,24 +19,101 @@
         <!-- End Bootstrap include stuff-->
         <title><?=$fullname?> Wallet</title>
         <link rel="shortcut icon" href="favicon.ico">
-    </head>
-    
-    
+    </head>   
     <body>
         <nav class="navbar navbar-default">
 			<div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<a class="navbar-brand" href="index.php"><?=$fullname?> Wallet</a>
-					<?php 
+					<?php
 					if (!empty($_SESSION['user_session']))
-					{
-						echo "<p class=\"navbar-text\">".$lang['WALLET_HELLO']."<strong> ". $user_session."</strong>!</p>";
-						echo "<p class=\"navbar-text\">".$lang['WALLET_BALANCE']."<strong id=\"balance\">".satoshitize($balance)."</strong>".$short."</p>";
-					}
-					?>
+					{?>
+						 <p class="navbar-text"><?php echo $lang['WALLET_HELLO'];?> <strong><?php echo $user_session;?></strong>!</p>
+						 <p class="navbar-text"><?php echo $lang['WALLET_BALANCE'];?><strong id="balance"><?php echo satoshitize($balance);?></strong><?php echo $short;?></p>
+					<?php }?>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
+							<?php
+							if(empty($_SESSION['user_session']))
+							{ ?>
+								 <li class="dropdown">
+								 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $lang['FORM_LOGIN'];?></a>
+									<ul class="dropdown-menu">
+										<li role="separator" class="divider"></li>
+											<div class="row">
+												<div class="col-md-12">
+													<form action="index.php" method="post" class="clearfix">
+														<input type="hidden" name="action" value="login" />
+															<div class="form-group">
+																<input type="text" class="form-control" name="username" placeholder=<?php echo $lang['FORM_USER'];?>>
+															</div>
+															<li role="separator" class="divider"></li>
+															<div class="form-group">
+																<input type="password" class="form-control" name="password" placeholder=<?php echo $lang['FORM_PASS'];?>>
+															</div>
+															<li role="separator" class="divider"></li>
+															<div class="form-group">
+																<input type="text" class="form-control" name="auth" placeholder=<?php echo $lang['FORM_2FA'];?>>
+															</div>
+															<li role="separator" class="divider"></li>
+															<div class="form-group">
+																<a href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['FORM_LOGIN'];?><span class="glyphicon glyphicon-log-in"></a>
+															</div>
+													</form>
+												</div>
+											</div>
+										</li>
+									</ul>
+								 </li>
+								 <li class="dropdown">
+								 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $lang['FORM_CREATE'];?></a>
+									<ul class="dropdown-menu">
+									<li role="separator" class="divider"></li>
+										<div class="row">
+											<div class="col-md-12">
+												<form action="index.php" method="post" class="clearfix">
+													<input type="hidden" name="action" value="register"/>
+														<div class="form-group">
+															<input type="text" class="form-control" name="username" placeholder=<?php echo $lang['FORM_USER'];?>>
+														</div>
+														<li role="separator" class="divider"></li>
+														<div class="form-group">
+															<input type="password" class="form-control" name="password" placeholder=<?php echo $lang['FORM_PASS'];?>>
+														</div>
+														<li role="separator" class="divider"></li>
+														<div class="form-group">
+															<input type="text" class="form-control" name="confirmPassword" placeholder=<?php echo $lang['FORM_PASSCONF'];?>>
+														</div>
+														<li role="separator" class="divider"></li>
+														<div class="form-group">
+															<a href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['FORM_SIGNUP'];?><span class="glyphicon glyphicon-check"></a>
+														</div>
+												</form>
+											</div>
+										</div>
+									</li>
+									</ul>
+								 </li>
+							<?php } ?>
+							<?php							
+							if(!empty($_SESSION['user_session']))
+							{?>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></a>
+									<ul class="dropdown-menu">
+										<li role="separator" class="divider"></li>
+										Support Key: <?php echo $_SESSION['user_supportpin'];?>
+										<li role="separator" class="divider"></li>
+										<li>
+											<form action="index.php" method="post">
+												<input type="hidden" name="action" value="logout" />
+												<a href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['WALLET_LOGOUT'];?> <span class="glyphicon glyphicon-log-out"></a>
+											</form>
+										</li>
+									</ul>
+								</li>
+							<?php } ?>
 					<li class="dropdown">
 						<a href"" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Language<span class="caret"></span></a>

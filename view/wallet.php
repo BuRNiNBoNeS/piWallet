@@ -5,8 +5,6 @@ if (!empty($error))
     echo "<p style='font-weight: bold; color: red;'>" . $error['message']; "</p>";
 }
 ?>
-<!--<p><?php echo $lang['WALLET_HELLO']; ?>, <strong><?php echo $user_session; ?></strong>!  <?php if ($admin) {?><strong><font color="red">[Admin]</font><?php }?></strong></p>-->
-<!--<p><?php echo $lang['WALLET_BALANCE']; ?> <strong id="balance"><?php echo satoshitize($balance); ?></strong> <?=$short?></p>-->
 
 <form action="index.php" method="POST">
 
@@ -16,23 +14,14 @@ if ($admin)
 {
   ?>
 <p><strong>Admin Links:</strong></p>
-  <a href="?a=home" class="btn btn-default">Admin Dashboard</a>
+  <a href="?a=body" class="btn btn-default">Admin Dashboard</a>
 
-<br />
-<br />
-<p><strong><?php echo $lang['WALLET_USERLINKS']; ?></strong></p>
+<br>
+<br>
   <?php
 }
 ?>
-<form>
-        <input type="hidden" name="action" value="logout" />
-        <button type="submit" class="btn btn-default"><?php echo $lang['WALLET_LOGOUT']; ?></button>
-</form>
-<form action="index.php" method="POST">
-<input type="hidden" name="action" value="support" action="index.php"/>
-<button type="submit" class="btn btn-default"><?php echo $lang['WALLET_SUPPORT']; ?></button>
-</form>
-
+<p><strong><?php echo $lang['WALLET_USERLINKS']; ?></strong></p>
 <form action="index.php" method="POST">
 <form>
 <input type="hidden" name="action" value="authgen" />

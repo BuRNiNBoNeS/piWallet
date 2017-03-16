@@ -18,8 +18,13 @@ if (!empty($_SESSION['user_session'])) {
     if ($admin && !empty($_GET['a'])) {
         $admin_action = $_GET['a'];
     }
-    if (!$admin_action) {
+    $balance = $client->getBalance($user_session);
+    if($balance > 0) {
         $balance = $client->getBalance($user_session) - $fee;
+    }
+    //$balance = $client->getBalance($user_session) - $fee;
+    if (!$admin_action) {
+        //$balance = $client->getBalance($user_session) - $fee;
         if (!empty($_POST['jsaction'])) {
             $json = array();
             switch ($_POST['jsaction']) {
@@ -27,7 +32,8 @@ if (!empty($_SESSION['user_session'])) {
                     $client->getnewaddress($user_session);
                     $json['success'] = true;
                     $json['message'] = "A new address was added to your wallet";
-                    $json['balance'] = $client->getBalance($user_session) - $fee;
+                    //$json['balance'] = $client->getBalance($user_session) - $fee;
+                    $json['balance'] = $balance;
                     $json['addressList'] = $client->getAddressList($user_session);
                     $json['transactionList'] = $client->getTransactionList($user_session);
                     echo json_encode($json); exit;
@@ -130,11 +136,6 @@ if (!empty($_SESSION['user_session'])) {
                     session_destroy();
                     header("Location: index.php");
                 break;
-                case "support":
-                    $error['message'] = "Please contact support via email at $support";
-                    echo "Support Key: ";
-                    echo $_SESSION['user_supportpin'];
-                break;
                 case "authgen":
                     $user = new User($mysqli);
                     $secret = $user->createSecret();
@@ -148,11 +149,13 @@ if (!empty($_SESSION['user_session'])) {
                 break;
             }
         }
+        $user = new User($mysqli);
+        $twoFAenabled = $user->userHas2fA();
         $addressList = $client->getAddressList($user_session);
         $transactionList = $client->getTransactionList($user_session);
-        include("view/header.php");
+        include("view/body.php");
         include("view/wallet.php");
-        include("view/footer.php");
+        //include("view/footer.php");
     } else {
         $user = new User($mysqli);
         switch ($admin_action) {
@@ -254,9 +257,9 @@ if (!empty($_SESSION['user_session'])) {
                         unset($info['password']);
                     }
                 }
-                include("view/header.php");
+                include("view/body.php");
                 include("view/admin_info.php");
-                include("view/footer.php");
+                //include("view/footer.php");
             break;
             default:
                 if ((!empty($_GET['m'])) && (!empty($_GET['i']))) {
@@ -284,9 +287,9 @@ if (!empty($_SESSION['user_session'])) {
                     }
                 }
                 $userList = $user->adminGetUserList();
-                include("view/header.php");
+                include("view/body.php");
                 include("view/admin_home.php");
-                include("view/footer.php");
+                //include("view/footer.php");
             break;
         }
     }
@@ -322,9 +325,9 @@ if (!empty($_SESSION['user_session'])) {
             break;
         }
     }
-    include("view/header.php");
-    include("view/home.php");
-    include("view/footer.php");
+    include("view/body.php");
+    //include("view/home.php");
+    //include("view/footer.php");
 }
 $mysqli->close();
 ?>
