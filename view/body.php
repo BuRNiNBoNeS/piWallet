@@ -224,7 +224,6 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</header>
-
 		<?php
                 if (!empty($error))
                 {
@@ -236,7 +235,7 @@
 		{?>
 		<div class="jumbotron">
     		<div  class="container">
-			<!--<img src="images/RenosCoin.jpg">-->
+			<img class="img-responsive" src="images/RenosCoin.jpg">
             </div>
         </div>
 		<?php } ?>	

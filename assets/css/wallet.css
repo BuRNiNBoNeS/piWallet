@@ -14,9 +14,8 @@ html, body {
 }
 
 .jumbotron {
-	background: url('http://localhost:3000/images/RenosCoin.jpg') center center no-repeat;
-	height: 500px;
-	background-size: auto 100%;
+	background: rgb(0, 127, 127); /* This is for ie8 and below */
+   	background: rgba(0, 127, 127, 0);
 }
 
 .navbar-default {
