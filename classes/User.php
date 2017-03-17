@@ -259,13 +259,12 @@ class User {
 			}
 		}
    
-   function userHas2fA()
+   function userHasAuth($user_session)
    {
-	   $id=$_SESSION['user_id'];
-			if (($id))
+			if (($user_session))
 			{
-				$twoFA = $this->mysqli->query("SELECT authused WHERE id=" . $id);
-				if($twoFA == 1) 
+				$twoFA = $this->mysqli->query("SELECT * FROM users WHERE username='".$user_session."'");
+				if($twoFA->num_rows > 0) 
 				{
 					return true;
 				} 

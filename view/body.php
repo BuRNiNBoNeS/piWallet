@@ -39,63 +39,57 @@
 								<?php
 								if(empty($_SESSION['user_session']))
 								{ ?>
-										<li class="dropdown">
+										<li class="button">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $lang['FORM_LOGIN'];?></a>
-										<ul class="dropdown-menu">
-											<li role="separator" class="divider"></li>
-												<div class="row">
-													<div class="col-md-12">
-														<form action="index.php" method="post" class="clearfix">
-															<input type="hidden" name="action" value="login" />
+											<ul class="dropdown-menu">
+													<div class="row">
+														<div class="col-md-12">
+															<form action="index.php" method="post" class="clearfix">
 																<div class="form-group">
 																	<input type="text" class="form-control" name="username" placeholder=<?php echo $lang['FORM_USER'];?>>
 																</div>
-																<li role="separator" class="divider"></li>
 																<div class="form-group">
 																	<input type="password" class="form-control" name="password" placeholder=<?php echo $lang['FORM_PASS'];?>>
 																</div>
-																<li role="separator" class="divider"></li>
 																<div class="form-group">
 																	<input type="text" class="form-control" name="auth" placeholder=<?php echo $lang['FORM_2FA'];?>>
 																</div>
 																<li role="separator" class="divider"></li>
 																<div class="form-group">
-																	<a href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['FORM_LOGIN'];?><span class="glyphicon glyphicon-log-in"></a>
+																	<input type="hidden" name="action" value="login" />
+																	<input type="submit" class="btn btn-outline-primary" value="<?php echo $lang['FORM_LOGIN'];?>" />
 																</div>
-														</form>
+															</form>
+														</div>
 													</div>
-												</div>
-											</li>
-										</ul>
+												</li>
+											</ul>
 										</li>
-										<li class="dropdown">
+										<li class="button">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $lang['FORM_CREATE'];?></a>
-										<ul class="dropdown-menu">
-										<li role="separator" class="divider"></li>
-											<div class="row">
-												<div class="col-md-12">
-													<form action="index.php" method="post" class="clearfix">
-														<input type="hidden" name="action" value="register"/>
-															<div class="form-group">
-																<input type="text" class="form-control" name="username" placeholder=<?php echo $lang['FORM_USER'];?>>
-															</div>
-															<li role="separator" class="divider"></li>
-															<div class="form-group">
-																<input type="password" class="form-control" name="password" placeholder=<?php echo $lang['FORM_PASS'];?>>
-															</div>
-															<li role="separator" class="divider"></li>
-															<div class="form-group">
-																<input type="text" class="form-control" name="confirmPassword" placeholder=<?php echo $lang['FORM_PASSCONF'];?>>
-															</div>
-															<li role="separator" class="divider"></li>
-															<div class="form-group">
-																<a href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['FORM_SIGNUP'];?><span class="glyphicon glyphicon-check"></a>
-															</div>
-													</form>
-												</div>
-											</div>
-										</li>
-										</ul>
+											<ul class="dropdown-menu">
+													<div class="row">
+														<div class="col-md-12">
+															<form action="index.php" method="post" class="clearfix">
+																<div class="form-group">
+																	<input type="text" class="form-control" name="username" placeholder="<?php echo $lang['FORM_USER'];?>">
+																</div>
+																<div class="form-group">
+																	<input type="password" class="form-control" name="password" placeholder="<?php echo $lang['FORM_PASS'];?>">
+																</div>
+																<div class="form-group">
+																	<input type="text" class="form-control" name="confirmPassword" placeholder="<?php echo $lang['FORM_PASSCONF'];?>">
+																</div>
+																<li role="separator" class="divider"></li>
+																<div class="form-group">
+																	<input type="hidden" name="action" value="register" />
+																	<input type="submit" class="btn btn-outline-primary" value="<?php echo $lang['FORM_LOGIN'];?>"/>
+																</div>
+															</form>
+														</div>
+													</div>
+												</li>
+											</ul>
 										</li>
 								<?php } ?>
 								<?php							
@@ -108,11 +102,19 @@
 											<?php
 											if($twoFAenabled) 
 											{?>
-												AuthUsed
+												<form action="index.php" method="post">
+												<form>
+													<input type="hidden" name="action" value="disauth" />
+													<button type="submit" class="btn btn-default"><?php echo $lang['WALLET_2FAOFF']; ?></button>
+												</form>
 											<?php }
 											else
 											{?>
-												No Auth
+												<form action="index.php" method="post">
+												<form>
+													<input type="hidden" name="action" value="authgen" />
+													<button type="submit" class="btn btn-default"><?php echo $lang['WALLET_2FAON']; ?></button>
+												</form>
 											<?php }?>
 											<li role="separator" class="divider"></li>
 											Support Key: <?php echo $_SESSION['user_supportpin'];?>
@@ -120,7 +122,8 @@
 											<li>
 												<form action="index.php" method="post">
 													<input type="hidden" name="action" value="logout" />
-													<a href="" type="button" class="btn btn-default" data-toggle="modal" data-target="#logoutModal"><?php echo $lang['WALLET_LOGOUT'];?> <span class="glyphicon glyphicon-log-out"></a>
+													<input type="submit" class="btn btn-outline-primary" value="<?php echo $lang['WALLET_LOGOUT'];?>"/>
+													<!--<a href="" type="button" class="btn btn-default" data-toggle="modal" data-target="#logoutModal"><?php echo $lang['WALLET_LOGOUT'];?> <span class="glyphicon glyphicon-log-out"></a>-->
 												</form>
 											</li>
 										</ul>
@@ -246,28 +249,5 @@
 				</b>
 			</div>
 		</footer>
-
-		<!-- Modal -->
-		<div id="logoutModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"><?php echo $lang['WALLET_LOGOUT'];?>?</h4>
-			</div>
-			<!--<div class="modal-body">
-				<p>Are you sure?</p>
-			</div>-->
-			<div class="modal-footer">
-				<input type="hidden" name="action" value="logout" />
-				<button type="button" class="btn btn-default" href="" onclick="document.forms[0].submit();return false;"><?php echo $lang['WALLET_LOGOUT'];?> <span class="glyphicon glyphicon-log-out"></button>
-			</div>
-			</div>
-
-		</div>
-		</div>
-
     </body>
 </html>

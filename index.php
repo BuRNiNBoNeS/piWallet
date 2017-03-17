@@ -22,6 +22,11 @@ if (!empty($_SESSION['user_session'])) {
     if($balance > 0) {
         $balance = $client->getBalance($user_session) - $fee;
     }
+    if($_SESSION['authused'] == 1){
+        $twoFAenabled = true;
+    } else {
+        $twoFAenabled = false;
+    }
     //$balance = $client->getBalance($user_session) - $fee;
     if (!$admin_action) {
         //$balance = $client->getBalance($user_session) - $fee;
@@ -149,8 +154,8 @@ if (!empty($_SESSION['user_session'])) {
                 break;
             }
         }
-        $user = new User($mysqli);
-        $twoFAenabled = $user->userHas2fA();
+        // $user = new User($mysqli);
+        // $twoFAenabled = $user->userHasAuth($user_session);
         $addressList = $client->getAddressList($user_session);
         $transactionList = $client->getTransactionList($user_session);
         include("view/body.php");
@@ -308,6 +313,7 @@ if (!empty($_SESSION['user_session'])) {
                     $_SESSION['user_admin'] = $result['admin'];
                     $_SESSION['user_supportpin'] = $result['supportpin'];
                     $_SESSION['user_id'] = $result['id'];
+                    $_SESSION['authused'] = $result['authused'];
                     header("Location: index.php");
                 }
             break;
@@ -317,10 +323,10 @@ if (!empty($_SESSION['user_session'])) {
                     $error['type'] = "register";
                     $error['message'] = $result;
                 } else {
-                    $username   = $mysqli->real_escape_string(   strip_tags(          $_POST['username']   ));
+                    $username   = $mysqli->real_escape_string(strip_tags($_POST['username']));
                     $_SESSION['user_session'] = $username;
                     $_SESSION['user_supportpin'] = "Please relogin for Support Key";
-                        header("Location: index.php");
+                    header("Location: index.php");
                 }
             break;
         }

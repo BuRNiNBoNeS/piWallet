@@ -21,23 +21,7 @@ if ($admin)
   <?php
 }
 ?>
-<p><strong><?php echo $lang['WALLET_USERLINKS']; ?></strong></p>
-<form action="index.php" method="POST">
-<form>
-<input type="hidden" name="action" value="authgen" />
-<button type="submit" class="btn btn-default"><?php echo $lang['WALLET_2FAON']; ?></button>
-</form><p>
-<form action="index.php" method="post">
-<form>
-<input type="hidden" name="action" value="disauth" />
-<button type="submit" class="btn btn-default"><?php echo $lang['WALLET_2FAOFF']; ?></button>
-</form>
-
 <br>
-
-<br />
-
-<br />
 <p><strong><?php echo $lang['WALLET_PASSUPDATE']; ?></strong></p>
 <form action="index.php" method="POST" class="clearfix" id="pwdform">
     <input type="hidden" name="action" value="password" />
@@ -49,7 +33,7 @@ if ($admin)
 </form>
 <p id="pwdmsg"></p>
 <br />
-<p style="font-size:1em;"><?php echo $lang['WALLET_SUPPORTNOTE']; ?></p>
+<!--<p style="font-size:1em;"><?php echo $lang['WALLET_SUPPORTNOTE']; ?></p>-->
 <br />
 <p><strong><?php echo $lang['WALLET_SEND']; ?></strong></p>
 <button type="button" class="btn btn-default" id="donate">Donate to <?=$fullname?> wallet's owner!</button><br />
