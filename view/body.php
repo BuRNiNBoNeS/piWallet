@@ -244,7 +244,7 @@
 			<div class="psuedoFooter">
 				<b>
 					<center>
-						<p>Powered by <a href="http://github.com/johnathanmartin/piWallet">piWallet</a></p>
+						<p>Powered by <a href="http://github.com/burninbones/piWallet">piWallet</a></p>
 					</center>
 				</b>
 			</div>
