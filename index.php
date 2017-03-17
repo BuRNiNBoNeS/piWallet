@@ -154,13 +154,10 @@ if (!empty($_SESSION['user_session'])) {
                 break;
             }
         }
-        // $user = new User($mysqli);
-        // $twoFAenabled = $user->userHasAuth($user_session);
         $addressList = $client->getAddressList($user_session);
         $transactionList = $client->getTransactionList($user_session);
         include("view/body.php");
         include("view/wallet.php");
-        //include("view/footer.php");
     } else {
         $user = new User($mysqli);
         switch ($admin_action) {
@@ -294,7 +291,6 @@ if (!empty($_SESSION['user_session'])) {
                 $userList = $user->adminGetUserList();
                 include("view/body.php");
                 include("view/admin_home.php");
-                //include("view/footer.php");
             break;
         }
     }
@@ -332,8 +328,6 @@ if (!empty($_SESSION['user_session'])) {
         }
     }
     include("view/body.php");
-    //include("view/home.php");
-    //include("view/footer.php");
 }
 $mysqli->close();
 ?>
