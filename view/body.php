@@ -235,7 +235,7 @@
 		{?>
 		<div class="jumbotron">
     		<div  class="container">
-			<img class="img-responsive" src="images/RenosCoin.jpg">
+			<img class="img-responsive" src="<?= $coin_banner ?>">
             </div>
         </div>
 		<?php } ?>	
