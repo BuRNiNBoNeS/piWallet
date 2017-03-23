@@ -6,7 +6,10 @@ $mysqli = new Mysqli($db_host, $db_user, $db_pass, $db_name);
 $twoFAenabled = false;
 $gen = "";
 $deauth = "";
+<<<<<<< HEAD
 $admin_action = false;
+=======
+>>>>>>> c324cfae186a75893ca3a11e3e41f58a400022c1
 if (!empty($_SESSION['user_session'])) {
     if(empty($_SESSION['token'])) {
         $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
@@ -328,7 +331,10 @@ break;
             $_SESSION['user_supportpin'] = $result['supportpin'];
             $_SESSION['authused'] = $result['authused'];
             header("Location: index.php");
+<<<<<<< HEAD
             Exit();
+=======
+>>>>>>> c324cfae186a75893ca3a11e3e41f58a400022c1
         }
         break;
 }
