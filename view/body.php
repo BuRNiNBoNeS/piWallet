@@ -349,9 +349,9 @@ if(!empty($_SESSION['user_session']) && !$admin_action)
               </tbody>
             </table>
             <?php } ?>
-<footer>
-<div class="psuedoFooter">
-	<b>
+              <footer>
+                <div class="psuedoFooter">
+                  <b>
     <center>
     <p>Powered by <a href="http://github.com/burninbones/piWallet">piWallet</a></p>
     </center>
@@ -480,152 +480,153 @@ if(!empty($_SESSION['user_session']) && !$admin_action)
               </div>
   </body>
 
-      <script type="text/javascript">
-      var blockchain_url = "<?=$blockchain_url?>";
-      $("#withdrawform input[name='action']").first().attr("name", "jsaction");
-      $("#newaddressform input[name='action']").first().attr("name", "jsaction");
-      $("#pwdform input[name='action']").first().attr("name", "jsaction");
-      $(document).on("click", ".open-sendDialog", function () {
-		var sendAddress = $(this).data('address');
-		$(".modal-body #address").val( sendAddress );
-		$(".modal-body #amount").val("0.01");
-	  });
-	  
-	  $("#donate").click(function(e) {
-        //$("#sendModal").modal('show');
-        $(".modal-body #address").val("<?=$donation_address?>");
-        $(e.currentTarget).find("input[name='amount']").val("0.01");
-      });
+  <script type="text/javascript">
+    var blockchain_url = "<?=$blockchain_url?>";
+    $("#withdrawform input[name='action']").first().attr("name", "jsaction");
+    $("#newaddressform input[name='action']").first().attr("name", "jsaction");
+    $("#pwdform input[name='action']").first().attr("name", "jsaction");
+    $(document).on("click", ".open-sendDialog", function() {
+      var sendAddress = $(this).data('address');
+      $(".modal-body #address").val(sendAddress);
+      $(".modal-body #amount").val("0.01");
+    });
 
-      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-      });
+    $("#donate").click(function(e) {
+      //$("#sendModal").modal('show');
+      $(".modal-body #address").val("<?=$donation_address?>");
+      $(e.currentTarget).find("input[name='amount']").val("0.01");
+    });
 
-      <?php if($gen) { ?>
-      $(document).ready(function() {
-        $('#addauthModal').modal('show');
-      });
-      <?php } ?>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
 
-      <?php if($deauth) { ?>
-      $(document).ready(function() {
-        $('#deauthModal').modal('show');
-      });
-      <?php } ?>
+    <?php if($gen) { ?>
+    $(document).ready(function() {
+      $('#addauthModal').modal('show');
+    });
+    <?php } ?>
 
-      $("#withdrawform").submit(function(e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        $.ajax({
-          url: formURL,
-          type: "POST",
-          data: postData,
-          success: function(data, textStatus, jqXHR) {
-            var json = $.parseJSON(data);
-            if (json.success) {
-              $("#withdrawform input.form-control").val("");
-              $("#withdrawmsg").text(json.message);
-              $("#withdrawmsg").css("color", "green");
-              $("#withdrawmsg").show();
-              updateTables(json);
-            } else {
-              $("#withdrawmsg").text(json.message);
-              $("#withdrawmsg").css("color", "red");
-              $("#withdrawmsg").show();
-            }
-            if (json.newtoken) {
-              $('input[name="token"]').val(json.newtoken);
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            //ugh, gtfo
+    <?php if($deauth) { ?>
+    $(document).ready(function() {
+      $('#deauthModal').modal('show');
+    });
+    <?php } ?>
+
+    $("#withdrawform").submit(function(e) {
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success: function(data, textStatus, jqXHR) {
+          var json = $.parseJSON(data);
+          if (json.success) {
+            $("#withdrawform input.form-control").val("");
+            $("#withdrawmsg").text(json.message);
+            $("#withdrawmsg").css("color", "green");
+            $("#withdrawmsg").show();
+            updateTables(json);
+          } else {
+            $("#withdrawmsg").text(json.message);
+            $("#withdrawmsg").css("color", "red");
+            $("#withdrawmsg").show();
           }
-        });
-        e.preventDefault();
-      });
-      $("#newaddressform").submit(function(e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        $.ajax({
-          url: formURL,
-          type: "POST",
-          data: postData,
-          success: function(data, textStatus, jqXHR) {
-            var json = $.parseJSON(data);
-            if (json.success) {
-              $("#newaddressmsg").text(json.message);
-              $("#newaddressmsg").css("color", "green");
-              $("#newaddressmsg").show();
-              updateTables(json);
-            } else {
-              $("#newaddressmsg").text(json.message);
-              $("#newaddressmsg").css("color", "red");
-              $("#newaddressmsg").show();
-            }
-            if (json.newtoken) {
-              $('input[name="token"]').val(json.newtoken);
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            //ugh, gtfo
+          if (json.newtoken) {
+            $('input[name="token"]').val(json.newtoken);
           }
-        });
-        e.preventDefault();
-      });
-      $("#pwdform").submit(function(e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        $.ajax({
-          url: formURL,
-          type: "POST",
-          data: postData,
-          success: function(data, textStatus, jqXHR) {
-            var json = $.parseJSON(data);
-            if (json.success) {
-              $("#pwdform input.form-control").val("");
-              $("#pwdmsg").text(json.message);
-              $("#pwdmsg").css("color", "green");
-              $("#pwdmsg").show();
-            } else {
-              $("#pwdmsg").text(json.message);
-              $("#pwdmsg").css("color", "red");
-              $("#pwdmsg").show();
-            }
-            if (json.newtoken) {
-              $('input[name="token"]').val(json.newtoken);
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            //ugh, gtfo
-          }
-        });
-        e.preventDefault();
-      });
-
-      function updateTables(json) {
-        $("#balance").text(json.balance.toFixed(8));
-        $("#alist tbody tr").remove();
-        for (var i = json.addressList.length - 1; i >= 0; i--) {
-          $("#alist tbody").prepend("<tr><td>" + json.addressList[i] + "</td></tr>");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          //ugh, gtfo
         }
-        $("#txlist tbody tr").remove();
-        for (var i = json.transactionList.length - 1; i >= 0; i--) {
-          var tx_type = '<b style="color: #01DF01;">Received</b>';
-          if (json.transactionList[i]['category'] == "send") {
-            tx_type = '<b style="color: #FF0000;">Sent</b>';
+      });
+      e.preventDefault();
+    });
+    $("#newaddressform").submit(function(e) {
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success: function(data, textStatus, jqXHR) {
+          var json = $.parseJSON(data);
+          if (json.success) {
+            $("#newaddressmsg").text(json.message);
+            $("#newaddressmsg").css("color", "green");
+            $("#newaddressmsg").show();
+            location.reload();
+            updateTables(json);
+          } else {
+            $("#newaddressmsg").text(json.message);
+            $("#newaddressmsg").css("color", "red");
+            $("#newaddressmsg").show();
           }
-          $("#txlist tbody").prepend('<tr> \
-        <td>' + moment(json.transactionList[i]['time'], "X").format('l hh:mm a') + '</td> \
-        <td>' + json.transactionList[i]['address'] + '</td> \
-        <td>' + tx_type + '</td> \
-        <td>' + Math.abs(json.transactionList[i]['amount']) + '</td> \
-        <td>' + json.transactionList[i]['fee'] + '</td> \
-        <td>' + json.transactionList[i]['confirmations'] + '</td> \
-        <td><a href="' + blockchain_url.replace("%s", json.transactionList[i]['txid']) + '" target="_blank">Info</a></td> \
-        </tr>');
+          if (json.newtoken) {
+            $('input[name="token"]').val(json.newtoken);
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          //ugh, gtfo
         }
+      });
+      e.preventDefault();
+    });
+    $("#pwdform").submit(function(e) {
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success: function(data, textStatus, jqXHR) {
+          var json = $.parseJSON(data);
+          if (json.success) {
+            $("#pwdform input.form-control").val("");
+            $("#pwdmsg").text(json.message);
+            $("#pwdmsg").css("color", "green");
+            $("#pwdmsg").show();
+          } else {
+            $("#pwdmsg").text(json.message);
+            $("#pwdmsg").css("color", "red");
+            $("#pwdmsg").show();
+          }
+          if (json.newtoken) {
+            $('input[name="token"]').val(json.newtoken);
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          //ugh, gtfo
+        }
+      });
+      e.preventDefault();
+    });
+
+    function updateTables(json) {
+      $("#balance").text(json.balance.toFixed(8));
+      $("#alist tbody tr").remove();
+      for (var i = json.addressList.length - 1; i >= 0; i--) {
+        $("#alist tbody").prepend("<tr><td>" + json.addressList[i] + "</td></tr>");
       }
-    </script>
+      $("#txlist tbody tr").remove();
+      for (var i = json.transactionList.length - 1; i >= 0; i--) {
+        var tx_type = '<b style="color: #01DF01;">Received</b>';
+        if (json.transactionList[i]['category'] == "send") {
+          tx_type = '<b style="color: #FF0000;">Sent</b>';
+        }
+        $("#txlist tbody").prepend('<tr> \
+            <td>' + moment(json.transactionList[i]['time'], "X").format('l hh:mm a') + '</td> \
+            <td>' + json.transactionList[i]['address'] + '</td> \
+            <td>' + tx_type + '</td> \
+            <td>' + Math.abs(json.transactionList[i]['amount']) + '</td> \
+            <td>' + json.transactionList[i]['fee'] + '</td> \
+            <td>' + json.transactionList[i]['confirmations'] + '</td> \
+            <td><a href="' + blockchain_url.replace("%s", json.transactionList[i]['txid']) + '" target="_blank">Info</a></td> \
+            </tr>');
+      }
+    }
+  </script>
 
   </html>

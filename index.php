@@ -6,6 +6,7 @@ $mysqli = new Mysqli($db_host, $db_user, $db_pass, $db_name);
 $twoFAenabled = false;
 $gen = "";
 $deauth = "";
+$admin_action = false;
 if (!empty($_SESSION['user_session'])) {
     if(empty($_SESSION['token'])) {
         $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
@@ -327,6 +328,7 @@ break;
             $_SESSION['user_supportpin'] = $result['supportpin'];
             $_SESSION['authused'] = $result['authused'];
             header("Location: index.php");
+            Exit();
         }
         break;
 }
