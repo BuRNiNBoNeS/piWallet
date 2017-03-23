@@ -3,6 +3,9 @@ define("IN_WALLET", true);
 include('common.php');
 
 $mysqli = new Mysqli($db_host, $db_user, $db_pass, $db_name);
+$twoFAenabled = false;
+$gen = "";
+$deauth = "";
 if (!empty($_SESSION['user_session'])) {
     if(empty($_SESSION['token'])) {
         $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
@@ -22,10 +25,12 @@ if (!empty($_SESSION['user_session'])) {
     if($balance > 0) {
         $balance = $client->getBalance($user_session) - $fee;
     }
-    if($_SESSION['authused'] == 1){
-        $twoFAenabled = true;
-    } else {
-        $twoFAenabled = false;
+    if(!empty($_SESSION['authused'])) {
+        if($_SESSION['authused'] == 1){
+            $twoFAenabled = true;
+        } else {
+            $twoFAenabled = false;
+        }
     }
     if (!$admin_action) {
         if (!empty($_POST['jsaction'])) {
@@ -35,7 +40,6 @@ if (!empty($_SESSION['user_session'])) {
                     $client->getnewaddress($user_session);
                     $json['success'] = true;
                     $json['message'] = "A new address was added to your wallet";
-                    //$json['balance'] = $client->getBalance($user_session) - $fee;
                     $json['balance'] = $balance;
                     $json['addressList'] = $client->getAddressList($user_session);
                     $json['transactionList'] = $client->getTransactionList($user_session);
@@ -143,19 +147,19 @@ case "authgen":
     $user = new User($mysqli);
     $secret = $user->createSecret();
     $gen=$user->enableauth();
-    echo $gen;
+    $twoFAenabled = true;
     break;
 case "disauth":
     $user = new User($mysqli);
-    $disauth=$user->disauth();
-    echo $disauth;
+    $deauth=$user->disauth();
+    $twoFAenabled = false;
     break;
 }
 }
 $addressList = $client->getAddressList($user_session);
 $transactionList = $client->getTransactionList($user_session);
 include("view/body.php");
-include("view/wallet.php");
+//include("view/wallet.php");
 } else {
     $user = new User($mysqli);
     switch ($admin_action) {
@@ -316,10 +320,13 @@ break;
                 $error['type'] = "register";
                 $error['message'] = $result;
         } else {
-            $username   = $mysqli->real_escape_string(strip_tags($_POST['username']));
+            $username = $mysqli->real_escape_string(strip_tags($_POST['username']));
             $_SESSION['user_session'] = $username;
-            $_SESSION['user_supportpin'] = "Please relogin for Support Key";
-                header("Location: index.php");
+            $result = $user->getSessionInfo($_SESSION['user_session']);
+            $_SESSION['user_id'] = $result['id'];
+            $_SESSION['user_supportpin'] = $result['supportpin'];
+            $_SESSION['authused'] = $result['authused'];
+            header("Location: index.php");
         }
         break;
 }

@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'Password';
 $lang['FORM_PASSCONF'] = 'Confirm Password';
 $lang['FORM_2FA'] = '2FA Authetication Code';
 $lang['FORM_SIGNUP'] = 'Sign Up';
-$lang['FORM_CREATE'] = '...or create a new account:';
+$lang['FORM_CREATE'] = '...or create a new account...';
 
 // Wallet Page
 
@@ -33,7 +33,7 @@ $lang['WALLET_PASSUPDATENEW'] = 'New Password';
 $lang['WALLET_PASSUPDATENEWCONF'] = 'Confirm New Password';
 $lang['WALLET_PASSUPDATECONF'] = 'Update Password';
 $lang['WALLET_SUPPORTNOTE'] = 'Please click on Support above and make a note of your Key. It will be used to help identify you if you ever forget your password. This code also changes everytime you change your password.';
-$lang['WALLET_SEND'] = 'Send funds:';
+$lang['WALLET_SEND'] = 'Send funds';
 $lang['WALLET_ADDRESS'] = 'Address';
 $lang['WALLET_AMOUNT'] = 'Amount';
 $lang['WALLET_SENDCONF'] = 'Send';

@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = ' المرور كلمة ';
 $lang['FORM_PASSCONF'] = 'تأكيد كلمة المرور';
 $lang['FORM_2FA'] = 'التوثيق لرمز التوثيق عاملين';
 $lang['FORM_SIGNUP'] = 'اشتراك';
-$lang['FORM_CREATE'] = '... جديد حساب فتح أو:';
+$lang['FORM_CREATE'] = '... جديد حساب فتح أو...';
 
 // Wallet Page
 

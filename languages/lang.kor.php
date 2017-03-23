@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = '암호';
 $lang['FORM_PASSCONF'] = '암호 확인';
 $lang['FORM_2FA'] = '2단계 인증 코드';
 $lang['FORM_SIGNUP'] = '가입';
-$lang['FORM_CREATE'] = '...또는 새로운 계정을 만드세요:';
+$lang['FORM_CREATE'] = '...또는 새로운 계정을 만드세요...';
 
 // Wallet Page
 

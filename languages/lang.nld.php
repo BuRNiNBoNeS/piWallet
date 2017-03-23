@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'Wachtwoord';
 $lang['FORM_PASSCONF'] = 'Bevestig wachtwoord';
 $lang['FORM_2FA'] = '2FA Authenticatie code';
 $lang['FORM_SIGNUP'] = 'Registreren';
-$lang['FORM_CREATE'] = '... maak een nieuw account';
+$lang['FORM_CREATE'] = '... maak een nieuw account...';
 
 // Wallet Page
 

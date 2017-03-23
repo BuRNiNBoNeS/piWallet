@@ -7,15 +7,11 @@ class User {
     
     private $mysqli;
     
-    function __construct($mysqli)
-    
-    {
+    function __construct($mysqli) {
         $this->mysqli = $mysqli;
     }
     
-    function logIn($username, $password)
-    
-    {
+    function logIn($username, $password) {
         if (empty($username) || empty($password))
             
         {
@@ -47,8 +43,7 @@ class User {
         }
     }
     
-    function add($username, $password, $confirmPassword)
-    {
+    function add($username, $password, $confirmPassword) {
         if (empty($username) || empty($password) || empty($confirmPassword))
         {
             return "Please, fill all the fields";
@@ -80,9 +75,20 @@ class User {
             }
         }
     }
+
+    function getSessionInfo($username) {
+        if (empty($username)) {
+            return false;
+        } else {
+            $result	= $this->mysqli->query("SELECT id,supportpin,authused FROM users WHERE username='" . $username . "'");
+            $user = $result->fetch_assoc();
+            if($user) {
+                return $user;
+            }
+        }
+    }
     
-    function updatePassword($user_session, $oldPassword, $newPassword, $confirmPassword) 
-    {
+    function updatePassword($user_session, $oldPassword, $newPassword, $confirmPassword) {
         global $hide_ids;
         if ($newPassword != $confirmPassword)
         {
@@ -129,10 +135,7 @@ class User {
         
     }
     
-    
-    function adminGetUserList()
-    
-    {
+    function adminGetUserList() {
         
         global $hide_ids;
         
@@ -151,10 +154,8 @@ class User {
         }
         return $return;
     }
-    
-    
-    function adminGetUserInfo($id)
-    {
+ 
+    function adminGetUserInfo($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
         {
@@ -169,10 +170,8 @@ class User {
             return false;
         }
     }
-    
-    
-    function adminUpdatePassword($id, $newPassword)
-    {
+      
+    function adminUpdatePassword($id, $newPassword) {
         global $hide_ids;
         $password = md5(addslashes(strip_tags($newPassword)));
         if (is_numeric($id) && !in_array($id, $hide_ids))
@@ -189,9 +188,7 @@ class User {
         }
     }
     
-    function enableauth()
-    
-    {
+    function enableauth() {
         
         //	global $hide_ids;
         $id=$_SESSION['user_id'];
@@ -201,13 +198,12 @@ class User {
         
         if (($id))
         {
-            $msg = "Secret Key: $secret *Please write this down and keep in a secure area*<br><img src='$qrcode'<br>Please scan this with the Google Authenticator app on your mobile phone. This page will clear on refresh, please be careful.";
+            $msg = "Secret Key: $secret<br><img src='$qrcode'>";
             $this->mysqli->query("UPDATE users SET authused=1, secret='" . $secret . "' WHERE id=" . $id); return "$msg";
         }
     }
     
-    function disauth()
-    {
+    function disauth() {
         $id=$_SESSION['user_id'];
         if (($id))
         {
@@ -216,25 +212,22 @@ class User {
         }
     }
     
-    function userHasAuth($user_session)
-    {
-        if (($user_session))
-        {
-            $twoFA = $this->mysqli->query("SELECT * FROM users WHERE username='".$user_session."'");
-            if($twoFA->num_rows > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
+    // function userHasAuth($user_session) {
+    //     if (($user_session))
+    //     {
+    //         $twoFA = $this->mysqli->query("SELECT * FROM users WHERE username='".$user_session."'");
+    //         if($twoFA->num_rows > 0)
+    //         {
+    //             return true;
+    //         }
+    //         else
+    //         {
+    //             return false;
+    //         }
+    //     }
+    // }
     
-    function adminDeleteAccount($id)
-    
-    {
+    function adminDeleteAccount($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
         {
@@ -242,9 +235,7 @@ class User {
         }
     }
     
-    function adminLockAccount($id)
-    
-    {
+    function adminLockAccount($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
         {
@@ -252,9 +243,7 @@ class User {
         }
     }
     
-    function adminUnlockAccount($id)
-    
-    {
+    function adminUnlockAccount($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
         {
@@ -262,8 +251,7 @@ class User {
         }
     }
     
-    function adminPrivilegeAccount($id)
-    {
+    function adminPrivilegeAccount($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
         {
@@ -271,8 +259,7 @@ class User {
         }
     }
     
-    function adminDeprivilegeAccount($id)
-    {
+    function adminDeprivilegeAccount($id) {
         global $hide_ids;
         if (is_numeric($id) && !in_array($id, $hide_ids))
             

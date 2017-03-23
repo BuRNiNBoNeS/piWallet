@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'पासवर्ड';
 $lang['FORM_PASSCONF'] = 'पासवर्ड की पुष्टि करें';
 $lang['FORM_2FA'] = '2FA सत्यापन कोड';
 $lang['FORM_SIGNUP'] = 'साइन अप करें';
-$lang['FORM_CREATE'] = '...या नया खाता बनाएं:';
+$lang['FORM_CREATE'] = '...या नया खाता बनाएं...';
 
 // Wallet Page
 

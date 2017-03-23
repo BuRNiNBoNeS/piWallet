@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'Κωδικός πρόσβασης';
 $lang['FORM_PASSCONF'] = 'Επιβεβαίωση Κωδικού πρόσβασης';
 $lang['FORM_2FA'] = 'Επιπλέον κωδικός ασφαλείας';
 $lang['FORM_SIGNUP'] = 'Εγγραφή';
-$lang['FORM_CREATE'] = 'Δημιουργία Νέου Λογαριασμού:';
+$lang['FORM_CREATE'] = 'Δημιουργία Νέου Λογαριασμού...';
 
 // Wallet Page
 

@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'şifre';
 $lang['FORM_PASSCONF'] = 'parolanızı onaylayın';
 $lang['FORM_2FA'] = '2FA Kimlik Doğrulama Kodu';
 $lang['FORM_SIGNUP'] = 'Kayıt ol';
-$lang['FORM_CREATE'] = '... Yeni hesap oluştur:';
+$lang['FORM_CREATE'] = '... Yeni hesap oluştur...';
 
 // Wallet Page
 

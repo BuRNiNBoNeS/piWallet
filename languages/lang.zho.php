@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = '密码';
 $lang['FORM_PASSCONF'] = '确认';
 $lang['FORM_2FA'] = '2FA验证码';
 $lang['FORM_SIGNUP'] = '注册';
-$lang['FORM_CREATE'] = '...或者创建一个钱包:';
+$lang['FORM_CREATE'] = '...或者创建一个钱包...';
 
 // Wallet Page
 

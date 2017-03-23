@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = ' mật khẩu ';
 $lang['FORM_PASSCONF'] = ' Xác nhận mật khẩu ';
 $lang['FORM_2FA'] = ' Mã xác thực hai nhân tố ';
 $lang['FORM_SIGNUP'] = ' Đăng kí ';
-$lang['FORM_CREATE'] = '... hoặc tạo một tài khoản mới:';
+$lang['FORM_CREATE'] = '... hoặc tạo một tài khoản mới...';
 
 // Wallet Page
 

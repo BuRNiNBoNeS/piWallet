@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'パスワード';
 $lang['FORM_PASSCONF'] = 'パスワードの確認';
 $lang['FORM_2FA'] = '2要素認証';
 $lang['FORM_SIGNUP'] = 'サインアップ';
-$lang['FORM_CREATE'] = '...または新しいアカウントを作成:';
+$lang['FORM_CREATE'] = '...または新しいアカウントを作成...';
 
 // Wallet Page
 

@@ -16,7 +16,7 @@ $lang['FORM_PASS'] = 'Kontrasenyas / Password';
 $lang['FORM_PASSCONF'] = 'Tiyakin ang Password';
 $lang['FORM_2FA'] = '2FA Authetication Code';
 $lang['FORM_SIGNUP'] = 'Mag-sign Up';
-$lang['FORM_CREATE'] = 'O Gumawa ng Bagong Account';
+$lang['FORM_CREATE'] = '...O Gumawa ng Bagong Account...';
 
 // Wallet Page
 
