@@ -18,14 +18,18 @@ Whats New:
 
 - [Support Pin](https://github.com/johnathanmartin/piWallet/wiki/Support-Pin)
 
-
-Planned Features:
-- Have QR Codes open in lightbox instead of new tab
+- QR Codes open in lightbox
 
 - Improved Bootstrap Theme 
 
+- Reorganized UI
+
+
+Planned Features:
 - Control of Private Keys
 
-Donate:
+- Address Book with quick send
 
-PayPal: http://jmartin.me/pay
+- Max Withdraw
+
+- Externalize Some Settings
