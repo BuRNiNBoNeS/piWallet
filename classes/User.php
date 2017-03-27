@@ -212,20 +212,6 @@ class User {
         }
     }
     
-    // function userHasAuth($user_session) {
-    //     if (($user_session))
-    //     {
-    //         $twoFA = $this->mysqli->query("SELECT * FROM users WHERE username='".$user_session."'");
-    //         if($twoFA->num_rows > 0)
-    //         {
-    //             return true;
-    //         }
-    //         else
-    //         {
-    //             return false;
-    //         }
-    //     }
-    // }
     
     function adminDeleteAccount($id) {
         global $hide_ids;

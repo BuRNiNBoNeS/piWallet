@@ -1,9 +1,9 @@
 html, body {
 	background: #007f7f;
-	background: -webkit-linear-gradient(#a9ff65,#007f7f);
-	background: -o-linear-gradient(#a9ff65,#007f7f);
-	background: -moz-linear-gradient(#a9ff65,#007f7f);
-	background: linear-gradient(#a9ff65,#007f7f);
+	background: -webkit-linear-gradient(#a9ff65, #007f7f);
+	background: -o-linear-gradient(#a9ff65, #007f7f);
+	background: -moz-linear-gradient(#a9ff65, #007f7f);
+	background: linear-gradient(#a9ff65, #007f7f);
 	margin: 0;
 	height: 100%;
 }
@@ -14,53 +14,66 @@ html, body {
 }
 
 .jumbotron {
-	background: rgb(0, 127, 127); /* This is for ie8 and below */
-   	background: rgba(0, 127, 127, 0);
+	background: rgb(0, 127, 127);
+	/* This is for ie8 and below */
+	background: rgba(0, 127, 127, 0);
 }
 
 .navbar-default {
 	background-color: #007f7f;
 	border-color: #a9ff65;
 }
+
 .navbar-default .navbar-brand {
 	color: #ffffff;
 }
+
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
 	color: #04AFBF;
 }
+
 .navbar-default .navbar-text {
 	color: #ffffff;
 }
+
 .navbar-default .navbar-nav > li > a {
 	color: #ffffff;
 }
+
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 	color: #04AFBF;
 }
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 	color: #ffffff;
 	background-color: #037f7f;
 }
+
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 	color: #04AFBF;
 	background-color: #037f7f;
 }
+
 .navbar-default .navbar-toggle {
 	border-color: #037f7f;
 }
+
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 	background-color: #037f7f;
 }
+
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #ffffff;
 }
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 	border-color: #ffffff;
 }
+
 .navbar-default .navbar-link {
 	color: #ffffff;
 }
+
 .navbar-default .navbar-link:hover {
 	color: #04AFBF;
 }
@@ -89,11 +102,13 @@ html, body {
 	}
 }
 
-footer {
+.footer {
 	position: absolute;
 	bottom: 0;
 	text-align: center;
 	width: 100%;
 }
 
-form { display: inline; }
+form {
+	display: inline;
+}

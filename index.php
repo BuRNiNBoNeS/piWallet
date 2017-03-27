@@ -6,10 +6,6 @@ $mysqli = new Mysqli($db_host, $db_user, $db_pass, $db_name);
 $twoFAenabled = false;
 $gen = "";
 $deauth = "";
-<<<<<<< HEAD
-$admin_action = false;
-=======
->>>>>>> c324cfae186a75893ca3a11e3e41f58a400022c1
 if (!empty($_SESSION['user_session'])) {
     if(empty($_SESSION['token'])) {
         $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
@@ -26,9 +22,6 @@ if (!empty($_SESSION['user_session'])) {
         $admin_action = $_GET['a'];
     }
     $balance = $client->getBalance($user_session);
-    if($balance > 0) {
-        $balance = $client->getBalance($user_session) - $fee;
-    }
     if(!empty($_SESSION['authused'])) {
         if($_SESSION['authused'] == 1){
             $twoFAenabled = true;
@@ -48,6 +41,8 @@ if (!empty($_SESSION['user_session'])) {
                     $json['addressList'] = $client->getAddressList($user_session);
                     $json['transactionList'] = $client->getTransactionList($user_session);
                     echo json_encode($json); exit;
+                    header("Location: index.php");
+                    unset($_POST);
                     break;
                 case "withdraw":
                     $json['success'] = false;
@@ -59,7 +54,7 @@ if (!empty($_SESSION['user_session'])) {
                     $json['message'] = "Tokens do not match";
                     $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
                     $json['newtoken'] = $_SESSION['token'];
-                } elseif ($_POST['amount'] > $balance) {
+                } elseif (($_POST['amount'] + $fee) > $balance) {
                     $json['message'] = "Withdrawal amount exceeds your wallet balance";
                 } else {
                     $withdraw_message = $client->withdraw($user_session, $_POST['address'], (float)$_POST['amount']);
@@ -102,6 +97,7 @@ if (!empty($_POST['action'])) {
         case "new_address":
             $client->getnewaddress($user_session);
             header("Location: index.php");
+            unset($_POST);
             break;
         case "withdraw":
             if (!WITHDRAWALS_ENABLED) {
@@ -114,7 +110,7 @@ if (!empty($_POST['action'])) {
             $error['type'] = "withdraw";
             $error['message'] = "Tokens do not match";
             $_SESSION['token'] = sha1('@s%a$l£t#'.rand(0,10000));
-        } elseif ($_POST['amount'] > $balance) {
+        } elseif (($_POST['amount'] + $fee) > $balance) {
             $error['type'] = "withdraw";
             $error['message'] = "Withdrawal amount exceeds your wallet balance";
         } else {
@@ -163,7 +159,6 @@ case "disauth":
 $addressList = $client->getAddressList($user_session);
 $transactionList = $client->getTransactionList($user_session);
 include("view/body.php");
-//include("view/wallet.php");
 } else {
     $user = new User($mysqli);
     switch ($admin_action) {
@@ -190,7 +185,7 @@ include("view/body.php");
                                     $json['message'] = "Withdrawals are temporarily disabled";
                             } elseif (empty($_POST['address']) || empty($_POST['amount']) || !is_numeric($_POST['amount'])) {
                                 $json['message'] = "You have to fill all the fields";
-                            } elseif ($_POST['amount'] > $info['balance']) {
+                            } elseif (($_POST['amount'] + $fee) > $info['balance']) {
                                 $json['message'] = "Withdrawal amount exceeds your wallet balance";
                             } else {
                                 $withdraw_message = $client->withdraw($info['username'], $_POST['address'], (float)$_POST['amount']);
@@ -233,7 +228,7 @@ include("view/body.php");
                     } elseif (empty($_POST['address']) || empty($_POST['amount']) || !is_numeric($_POST['amount'])) {
                         $error['type'] = "withdraw";
                         $error['message'] = "You have to fill all the fields";
-                    } elseif ($_POST['amount'] > $info['balance']) {
+                    } elseif (($_POST['amount'] + $fee) > $info['balance']) {
                         $error['type'] = "withdraw";
                         $error['message'] = "Withdrawal amount exceeds your wallet balance";
                     } else {
@@ -266,7 +261,7 @@ include("view/body.php");
 }
 }
 include("view/body.php");
-include("view/admin_info.php");
+//include("view/admin_info.php");
 break;
 default:
     if ((!empty($_GET['m'])) && (!empty($_GET['i']))) {
@@ -295,7 +290,7 @@ default:
 }
 $userList = $user->adminGetUserList();
 include("view/body.php");
-include("view/admin_home.php");
+//include("view/admin_home.php");
 break;
 }
 }
@@ -331,10 +326,6 @@ break;
             $_SESSION['user_supportpin'] = $result['supportpin'];
             $_SESSION['authused'] = $result['authused'];
             header("Location: index.php");
-<<<<<<< HEAD
-            Exit();
-=======
->>>>>>> c324cfae186a75893ca3a11e3e41f58a400022c1
         }
         break;
 }
